@@ -8,11 +8,12 @@ Can be used as idle screen for the mark2
 
 ![](gui.png)
 ![](gui1.png)
-![](gui2.png)
+![](gui3.png)
 
 ## Examples
 * "news about space"
 * "more news"
+* "space news from 15 days ago"
 
 ## Credits
 - JarbasAi

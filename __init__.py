@@ -5,6 +5,8 @@ from datetime import timedelta, datetime
 from mtranslate import translate
 from mycroft.util import create_daemon
 from adapt.intent import IntentBuilder
+from lingua_franca.parse import extract_datetime
+from lingua_franca.format import nice_date
 import random
 
 
@@ -34,7 +36,6 @@ class SpaceNewsSkill(MycroftSkill):
 
     def get_news(self):
         news = []
-        # date_str datetime
         if self.settings["esa_news"]:
             url = "http://hubblesite.org/api/v3/external_feed/esa_feed?page=all"
             data = self.session.get(url).json()
@@ -87,8 +88,7 @@ class SpaceNewsSkill(MycroftSkill):
         if self.settings["filter"]:
             news = [n for n in news if n.get("imgLink")]
         news.sort(key=lambda r: r["datetime"], reverse=True)
-        for idx in range(len(news)):
-            news[idx].pop("datetime")
+
         self.total_news = len(news)
         return news
 
@@ -112,9 +112,10 @@ class SpaceNewsSkill(MycroftSkill):
                 continue  # rate limit from google translate
         return bucket
 
-    def _display_and_speak(self, news_idx):
-        data = self.update_picture(news_idx)
+    def _display_and_speak(self, news_idx=None, date=None):
+        data = self.update_picture(news_idx, date)
         self.already_said.append(news_idx)
+        self.speak_dialog("news", {"date": data["human_date"]})
         self.gui.show_image(data["imgLink"],
                             override_idle=True,
                             title=data["title"],
@@ -125,13 +126,19 @@ class SpaceNewsSkill(MycroftSkill):
     # idle screen
     def update_picture(self, idx=None, date=None):
         data = self.get_news()
-        self.settings["raw"] = data
         if idx is not None:
             data = data[idx]
             self.current_news = idx
         elif date is not None:
             if isinstance(date, datetime):
                 date = date.date()
+
+            def nearest(items, pivot):
+                return min(items, key=lambda x: abs(x - pivot))
+
+            dates = [d["datetime"].date() for d in data]
+            date = nearest(dates, date)
+
             for d in data:
                 if d["date_str"] == str(date):
                     data = d
@@ -149,6 +156,9 @@ class SpaceNewsSkill(MycroftSkill):
             self.gui[k] = data[k]
         self.set_context("space")
 
+        date = data.pop("datetime")
+        self.settings["raw"] = data
+        data["human_date"] = nice_date(date, lang=self.lang)
         return data
 
     @resting_screen_handler("SpaceNews")
@@ -170,11 +180,15 @@ class SpaceNewsSkill(MycroftSkill):
     @intent_handler(IntentBuilder("SpaceNewsIntent")
                     .require("space").require("news"))
     def handle_news(self, message):
-        # avoid repeating news
-        news_idx = len(self.already_said)
-        if news_idx >= self.total_news - 1:
-            news_idx = random.randint(0, self.total_news - 1)
-        self._display_and_speak(news_idx)
+        date = extract_datetime(message.data["utterance"], lang="en")
+        if date:
+            self._display_and_speak(date=date[0])
+        else:
+            # avoid repeating news
+            news_idx = len(self.already_said)
+            if news_idx >= self.total_news - 1:
+                news_idx = random.randint(0, self.total_news - 1)
+            self._display_and_speak(news_idx)
 
     @intent_handler(IntentBuilder("PrevSpaceNewsIntent")
                     .require("previous").require("news").optionally("space"))
