@@ -1,0 +1,10 @@
+[Desktop Entry]
+Terminal=false
+Type=Application
+Name=SpaceNews
+Exec=mycroft-gui-app --hideTextInput --skill=skill-space-news.jarbasskills.home
+Icon=icon.png
+Categories=VoiceApp
+StartupNotify=false
+X-DBUS-StartupType=None
+X-KDE-StartupNotify=false
