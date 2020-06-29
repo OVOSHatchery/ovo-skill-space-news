@@ -486,6 +486,7 @@ class SpaceNewsSkill(MycroftSkill):
         for k in data:
             self.gui[k] = data[k]
         self.set_context("space")
+        self.set_context("url", data["url"])
 
         self.settings["raw"] = data
         data["human_date"] = nice_date(date, lang=self.lang)
@@ -519,6 +520,13 @@ class SpaceNewsSkill(MycroftSkill):
             if news_idx >= self.total_news - 1:
                 news_idx = random.randint(0, self.total_news - 1)
             self._display_and_speak(news_idx)
+
+    @intent_handler(IntentBuilder("SpaceNewsWebsiteIntent")
+                    .optionally("space").optionally("news").require("website")
+                    .require("open").require("url"))
+    def handle_website(self, message):
+        url = message.data["url"]
+        self.gui.show_url(url, True)
 
     @intent_handler(IntentBuilder("PrevSpaceNewsIntent")
                     .require("previous").require("news").optionally("space"))

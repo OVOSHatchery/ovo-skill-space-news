@@ -15,15 +15,16 @@ Can be used as idle screen for the mark2
 ![](gui.png)
 ![](gui1.png)
 ![](gui3.png)
+![](gui4.png)
 
 ## Examples
 * "news about space"
 * "more news"
 * "space news from 15 days ago"
+* "open website"
 
 ## TODO
 * websettings
-* "open website" intent
 
 ## Credits
 - JarbasAi
