@@ -42,6 +42,7 @@ class SpaceNewsSkill(MycroftSkill):
                 d = {"title": new["title"],
                      "source": "James Webb Telescope",
                      "caption": new["description"],
+                     "utterance": new.get("description") or new["title"],
                      "date_str": new["pub_date"].split("T")[0],
                      "datetime": datetime.strptime(
                          new["pub_date"].split("T")[0], "%Y-%m-%d")}
@@ -57,6 +58,7 @@ class SpaceNewsSkill(MycroftSkill):
                 d = {"title": new["title"],
                      "source": "James Webb Telescope",
                      "caption": new["description"],
+                     "utterance": new.get("description") or new["title"],
                      "date_str": new["pub_date"].split("T")[0],
                      "datetime": datetime.strptime(
                          new["pub_date"].split("T")[0], "%Y-%m-%d")}
@@ -73,7 +75,8 @@ class SpaceNewsSkill(MycroftSkill):
                     d = {"title": new["title"],
                          "source": new["news_site"],
                          "url": new["url"],
-                         "caption": new.get("summary") or new["title"],
+                         "caption": new.get("summary"),
+                         "utterance": new.get("summary") or new["title"],
                          "date_str": new["published_date"].split("T")[0],
                          "datetime": datetime.strptime(
                              new["published_date"].split("T")[0], "%Y-%m-%d")}
@@ -83,7 +86,7 @@ class SpaceNewsSkill(MycroftSkill):
 
         if self.settings["filter"]:
             news = [n for n in news if n.get("imgLink")]
-        news.sort(key=lambda r: r["datetime"])
+        news.sort(key=lambda r: r["datetime"], reverse=True)
         for idx in range(len(news)):
             news[idx].pop("datetime")
         self.total_news = len(news)
@@ -117,7 +120,7 @@ class SpaceNewsSkill(MycroftSkill):
                             title=data["title"],
                             fill='PreserveAspectFit',
                             caption=data["caption"])
-        self.speak(data["caption"], wait=True)
+        self.speak(data["utterance"], wait=True)
 
     # idle screen
     def update_picture(self, idx=None, date=None):
