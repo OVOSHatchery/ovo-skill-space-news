@@ -183,174 +183,174 @@ class SpaceNewsSkill(MycroftSkill):
     def update_rss_feeds(self, event=None):
         now = datetime.now()
         next_update = now + timedelta(hours=1)
-        self.rss_cache = []
+        news = []
         if self.settings["jpl_news"]:
             author = "NASA Jet Propulsion Laboratory"
             url = "http://www.jpl.nasa.gov/multimedia/rss/news.xml"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
 
         if self.settings["nasa_breaking_news"]:
             author = "NASA Breaking News"
             url = "https://www.nasa.gov/rss/dyn/breaking_news.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
 
         if self.settings["nasa_education_news"]:
             author = "NASA Education"
             url = "https://www.nasa.gov/rss/dyn/educationnews.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_iss_news"]:
             author = "NASA Space Station News"
             url = "https://www.nasa.gov/rss/dyn/shuttle_station.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_solar_system_news"]:
             author = "NASA Solar System News"
             url = "https://www.nasa.gov/rss/dyn/solar_system.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_earth_news"]:
             author = "NASA Earth News"
             url = "https://www.nasa.gov/rss/dyn/earth.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_aeronautics_news"]:
             author = "NASA Aeronautics News"
             url = "https://www.nasa.gov/rss/dyn/aeronautics.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_ames"]:
             author = "Ames Research Center News and Features"
             url = "https://www.nasa.gov/rss/dyn/ames_news.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_armstrong"]:
             author = "Armstrong Flight Research Center News and Features"
             url = "https://www.nasa.gov/rss/dyn/armstrong_news.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_glenn"]:
             author = "Glenn Research Center News and Features"
             url = "https://www.nasa.gov/rss/dyn/glenn_features.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_goddard"]:
             author = "Goddard Spaceflight Center News and Features"
             url = "https://www.nasa.gov/rss/dyn/goddard-NewsFeature.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_johnson"]:
             author = "Johnson Space Center"
             url = "http://www.nasa.gov/rss/dyn/johnson_news.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_marshall"]:
             author = "NASA Marshall Spaceflight Center News and Features"
             url = "https://www.nasa.gov/rss/dyn/msfc_news.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_stennis"]:
             author = "NASA Stennis Space Center News and Features"
             url = "https://www.nasa.gov/rss/dyn/centers/stennis/news/latest_news.rss"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_sti"]:
             author = "NASA STI"
             url = "http://www.sti.nasa.gov/scan/rss99-01.xml"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["nasa_reports"]:
             author = "NASA STI Reports"
             url = "http://www.sti.nasa.gov/scan/rss99-02.xml"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_news"]:
             author = "ESA Space News"
             url = "http://www.esa.int/rssfeed/Our_Activities/Space_News"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_earth"]:
             author = "ESA Observing the Earth"
             url = "http://www.esa.int/rssfeed/Our_Activities/Observing_the_Earth"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_flight"]:
             author = "ESA Human Spaceflight"
             url = "http://www.esa.int/rssfeed/Our_Activities/Human_Spaceflight"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_launchers"]:
             author = "ESA Launchers"
             url = "http://www.esa.int/rssfeed/Our_Activities/Launchers"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_navigation"]:
             author = "ESA Navigation"
             url = "http://www.esa.int/rssfeed/Our_Activities/Navigation"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_science"]:
             author = "ESA Space Science"
             url = "http://www.esa.int/rssfeed/Our_Activities/Space_Science"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_tech"]:
             author = "ESA Space Engineering Technology"
             url = "http://www.esa.int/rssfeed/Our_Activities/Space_Engineering_Technology"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_operations"]:
             author = "ESA Operations"
             url = "http://www.esa.int/rssfeed/Our_Activities/Operations"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_comms"]:
             author = "ESA Telecommunications Integrated Applications"
             url = "http://www.esa.int/rssfeed/Our_Activities/Telecommunications_Integrated_Applications"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
         if self.settings["esa_education"]:
             author = "ESA Education"
             url = "http://www.esa.int/rssfeed/Education"
             for new in self.parse_feed(url, author):
-                if new not in self.rss_cache:
-                    self.rss_cache.append(new)
+                if new not in news:
+                    news.append(new)
 
         # remove duplicates (by title)
         titles = []
-        for idx, n in enumerate(self.rss_cache):
+        for idx, n in enumerate(news):
             if n["title"] in titles:
-                self.rss_cache[idx] = None
+                news[idx] = None
             else:
                 titles.append(n["title"])
-        self.rss_cache = [r for r in self.rss_cache if r]
+        self.rss_cache = [r for r in news if r]
         # sort
         self.rss_cache.sort(key=lambda r: r["datetime"], reverse=True)
         # update data in 1 hour
