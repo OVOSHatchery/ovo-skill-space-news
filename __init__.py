@@ -152,11 +152,13 @@ class SpaceNewsSkill(MycroftSkill):
             self.current_news = 0
 
         data = self._tx_keys(data)
+        date = data.pop("datetime")
+
         for k in data:
             self.gui[k] = data[k]
         self.set_context("space")
 
-        date = data.pop("datetime")
+
         self.settings["raw"] = data
         data["human_date"] = nice_date(date, lang=self.lang)
         return data
