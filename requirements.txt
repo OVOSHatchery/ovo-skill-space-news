@@ -1,2 +1,4 @@
 mtranslate
 requests_cache
+feedparser
+bs4

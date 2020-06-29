@@ -4,6 +4,12 @@
 
 All the latest news about Space!
 
+Sources:
+- [ESA RSS feeds](http://www.esa.int/Services/RSS_Feeds)
+- [NASA RSS feeds](https://www.nasa.gov/content/nasa-rss-feeds)
+- [spaceflight-news-api](https://spaceflightnewsapi.net/)
+- [hubble site feeds](http://hubblesite.org/api/documentation#external_feed)
+
 Can be used as idle screen for the mark2
 
 ![](gui.png)
@@ -15,8 +21,14 @@ Can be used as idle screen for the mark2
 * "more news"
 * "space news from 15 days ago"
 
+## TODO
+* websettings
+* "open website" intent
+
 ## Credits
 - JarbasAi
+- [ESA RSS feeds](http://www.esa.int/Services/RSS_Feeds)
+- [NASA RSS feeds](https://www.nasa.gov/content/nasa-rss-feeds)
 - [spaceflight-news-api](https://spaceflightnewsapi.net/)
 - [hubble site feeds](http://hubblesite.org/api/documentation#external_feed)
 
