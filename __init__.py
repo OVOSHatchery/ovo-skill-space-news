@@ -124,7 +124,6 @@ class SpaceNewsSkill(MycroftSkill):
             # ESA education
             # http://www.esa.int/rssfeed/Education
             self.settings["esa_education"] = True
-
         if "space_news" not in self.settings:
             # https://spacenews.com/feed/
             self.settings["space_news"] = True

@@ -5,6 +5,7 @@
 All the latest news about Space!
 
 Sources:
+- [Space News](https://spacenews.com/feed/)
 - [ESA RSS feeds](http://www.esa.int/Services/RSS_Feeds)
 - [NASA RSS feeds](https://www.nasa.gov/content/nasa-rss-feeds)
 - [spaceflight-news-api](https://spaceflightnewsapi.net/)
