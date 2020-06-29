@@ -125,6 +125,10 @@ class SpaceNewsSkill(MycroftSkill):
             # http://www.esa.int/rssfeed/Education
             self.settings["esa_education"] = True
 
+        if "space_news" not in self.settings:
+            # https://spacenews.com/feed/
+            self.settings["space_news"] = True
+
         if "filter" not in self.settings:
             # ignore entries without picture
             self.settings["filter"] = True
@@ -184,6 +188,12 @@ class SpaceNewsSkill(MycroftSkill):
         now = datetime.now()
         next_update = now + timedelta(hours=1)
         news = []
+        if self.settings["space_news"]:
+            url = "https://spacenews.com/feed/"
+            author = "SpaceNews.com"
+            for new in self.parse_feed(url, author):
+                if new not in news:
+                    news.append(new)
         if self.settings["jpl_news"]:
             author = "NASA Jet Propulsion Laboratory"
             url = "http://www.jpl.nasa.gov/multimedia/rss/news.xml"
@@ -344,6 +354,7 @@ class SpaceNewsSkill(MycroftSkill):
                     news.append(new)
 
         # remove duplicates (by title)
+        # TODO improve this, keep version with caption
         titles = []
         for idx, n in enumerate(news):
             if n["title"] in titles:
