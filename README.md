@@ -12,7 +12,7 @@ Can be used as idle screen for the mark2
 
 ## Examples
 * "news about space"
-* "next news"
+* "more news"
 
 ## Credits
 - JarbasAi
