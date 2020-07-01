@@ -500,6 +500,7 @@ class SpaceNewsSkill(MycroftSkill):
 
         self.settings["raw"] = data
         data["human_date"] = nice_date(date, lang=self.lang)
+        self.set_context("SpaceNews")
         return data
 
     @resting_screen_handler("SpaceNews")
@@ -539,18 +540,18 @@ class SpaceNewsSkill(MycroftSkill):
         self.gui.show_url(url, True)
 
     @intent_handler(IntentBuilder("PrevSpaceNewsIntent")
-                    .require("previous").require("news").optionally("space"))
-    @intent_handler(IntentBuilder("PrevSpaceNewsPictureIntent")
-                    .require("previous").require("picture"))
+                    .require("previous").require("SpaceNews")
+                    .optionally("space").optionally("picture")
+                    .optionally("news"))
     def handle_prev(self, message):
         news_idx = max(self.current_news - 1, 0)
         # TODO error dialog if out of range
         self._display_and_speak(news_idx)
 
     @intent_handler(IntentBuilder("NextSpaceNewsIntent")
-                    .require("next").require("news").optionally("space"))
-    @intent_handler(IntentBuilder("NextSpaceNewsPictureIntent")
-                    .require("next").require("picture"))
+                    .require("next").require("SpaceNews")
+                    .optionally("space").optionally("picture")
+                    .optionally("news"))
     def handle_next(self, message):
         news_idx = min(self.current_news + 1, self.total_news - 1)
         # TODO error dialog if out of range
